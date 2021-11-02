@@ -1,0 +1,26 @@
+<div class="container" fxLayout="column" fxLayoutAlign="center">
+
+  <div fxFlex>
+    <agm-map 
+      [latitude]="latitude" 
+      [longitude]="longitude" 
+      [scrollwheel]="false" 
+      [zoom]="zoom"
+      (mapClick)="onMouseClick($event)"
+    >
+      <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
+    </agm-map>
+  </div>
+
+  <div fxFlex fxFlexAlign="center"
+       class="autocomplete-container"
+       [ngStyle]="{'min-width.%': 100}"
+       [ngStyle]="{'width.%': 70}">
+    <mat-google-maps-autocomplete (onLocationSelected)="onLocationSelected($event)">
+    </mat-google-maps-autocomplete>
+  </div>
+
+  <div *ngFor="let weather of weather$ | async" class="weather">
+    <app-daily-weather [weather]="weather"></app-daily-weather>
+  </div>
+</div>
